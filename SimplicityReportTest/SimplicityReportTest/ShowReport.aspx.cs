@@ -62,8 +62,8 @@ namespace SimplicityReportTest
             }
 
             TextBox1.Text += "\nOutside auth";
-            auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];
-            if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)
+            auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];//////Taking Authentication from Session
+            if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)////Check Authenticated and Environment
             {
                 TextBox1.Text += "\nInside auth";
                 reportType = Request[REPORT_TYPE];
@@ -140,7 +140,7 @@ namespace SimplicityReportTest
             else
             {
                 Session["environment"] = RequestedEnvironment;
-                Session[Authenticate.ACCESS_TOKEN] = null;
+                Session[Authenticate.ACCESS_TOKEN] = null;/////Assuring to Redirect Other Environment If Login Already
                 Session[Authenticate.CALLER_URL] = HttpContext.Current.Request.Url.AbsoluteUri;
                 Response.Redirect("~/Authenticate.aspx");
                 //lblInvoice.Text = "no auth";
