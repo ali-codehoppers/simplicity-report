@@ -1,0 +1,7 @@
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\x64\Release\SimplicityReportTest.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\x64\Release\SimplicityReportTest.pdb
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\x64\Release\Newtonsoft.Json.Net35.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\x64\Release\log4net.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\x64\Release\ResolveAssemblyReference.cache
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\x64\Release\SimplicityReportTest.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\x64\Release\SimplicityReportTest.pdb
