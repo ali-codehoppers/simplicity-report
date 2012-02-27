@@ -1,0 +1,6 @@
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\SimplicityReportTest.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\SimplicityReportTest.pdb
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\bin\Newtonsoft.Json.Net35.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\Debug\ResolveAssemblyReference.cache
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\Debug\SimplicityReportTest.dll
+D:\Projects\DotNet\SimplicityReporte Up\SimplicityReportTest\SimplicityReportTest\obj\Debug\SimplicityReportTest.pdb
