@@ -8,6 +8,7 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Runtime.Serialization.Json;
+using System.Configuration;
 
 namespace SimplicityReportTest
 {
@@ -29,7 +30,7 @@ namespace SimplicityReportTest
                     + "&grant_type=authorization_code"
                     + "&client_id=" + HttpUtility.UrlEncode(Authenticate.CONSUMER_KEY_TEST)
                     + "&client_secret=" + HttpUtility.UrlEncode(Authenticate.CONSUMER_SECRET_TEST)
-                    + "&redirect_uri=" + HttpUtility.UrlEncode(Authenticate.REDIRECT_URL_TEST);
+                    + "&redirect_uri=" + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"]);
             }
             else
             {
@@ -37,7 +38,7 @@ namespace SimplicityReportTest
                  + "&grant_type=authorization_code"
                  + "&client_id=" + HttpUtility.UrlEncode(Authenticate.CONSUMER_KEY_PROD)
                  + "&client_secret=" + HttpUtility.UrlEncode(Authenticate.CONSUMER_SECRET_PROD)
-                 + "&redirect_uri=" + HttpUtility.UrlEncode(Authenticate.REDIRECT_URL_PROD);
+                 + "&redirect_uri=" + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"]);
             }
             Logger.LogInfoMessage("Paramters:" + parameters);
             string result = HttpPost(tokenUrl, parameters);
