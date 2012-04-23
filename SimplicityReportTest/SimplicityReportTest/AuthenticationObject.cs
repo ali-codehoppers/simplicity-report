@@ -24,8 +24,5 @@ namespace SimplicityReportTest
 
         private string _access_token;
         public string access_token { get { return _access_token; } set { _access_token = value; } }
-
-        
-
     }
 }
