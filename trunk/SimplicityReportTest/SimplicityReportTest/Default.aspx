@@ -16,7 +16,6 @@
             document.write("<a href=\"authenticate.aspx\">Click here to retrieve contacts from Salesforce via REST/OAuth.</a>");
         }
         </script>
-
     </form>
 </body>
 </html>

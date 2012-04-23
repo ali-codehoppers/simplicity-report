@@ -38,8 +38,11 @@ namespace SimplicityReportTest
         //public const string REDIRECT_URL_PROD = "https://ec2-23-20-7-131.compute-1.amazonaws.com/SCReports/authenticate2.aspx";
 
 
-        public const string CONSUMER_KEY_TEST = "3MVG9MHOv_bskkhQoIrnfjV3ecs4jJgoexrq4bzjcbA.7k_tTWbyQDJs9fJQdvyLjTX_euirVMP_UJ.BbGiPJ";
-        public const string CONSUMER_SECRET_TEST = "425811161419072524";
+        //public const string CONSUMER_KEY_TEST = "3MVG9MHOv_bskkhQoIrnfjV3ecs4jJgoexrq4bzjcbA.7k_tTWbyQDJs9fJQdvyLjTX_euirVMP_UJ.BbGiPJ";
+        //public const string CONSUMER_SECRET_TEST = "425811161419072524";
+        public const string CONSUMER_KEY_TEST = "3MVG9yZ.WNe6byQCZHrdwlbkQ4G_HCtDcTIOR6E1zkuQjnuFvuugpGTpEPNX9yJ8olL5sjaDDUbkKdhv4Jwik";
+        public const string CONSUMER_SECRET_TEST = "7657890509844575091";
+        
         public const string ENVIRONMENT_TEST = "https://test.salesforce.com";
 
         //public const string REDIRECT_URL_TEST = "https://ec2-23-20-7-131.compute-1.amazonaws.com/SCReports/authenticate2.aspx";
