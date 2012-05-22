@@ -527,4 +527,41 @@
       
     </Tables>
 	</Report>
+	
+	
+	
+	
+	
+	
+	
+	<Report>
+    <ID>EC6A5C5E-A312-11E1-B840-B1E36088709B</ID>
+    <Name>Invoice_WebProof</Name>
+    <RPTFileName>rptInvoice_WebProof.rpt</RPTFileName>
+    <ReportParameters>
+	
+	<Parameter>
+        <Name>invoice_no</Name>
+      </Parameter>
+	  
+    </ReportParameters>
+    
+	<Tables>
+	  <Table>
+        <Name>simplicity__objOrderInvoice__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters><Parameter>
+            <Name>id</Name>
+            <ReportParameterIndex>1</ReportParameterIndex>
+          </Parameter></TableParameters>
+      </Table>
+      
+
+	  
+	  
+      
+    </Tables>
+  </Report>
+	
+	
 </Reports>
