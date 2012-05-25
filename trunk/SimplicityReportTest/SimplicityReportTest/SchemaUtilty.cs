@@ -13,7 +13,7 @@ namespace SimplicityReportTest
 {
     public class SchemaUtilty
     {
-        public static bool isDebugMode = false;
+        public static bool isDebugMode = true;
         public static String GetFullQueryString(DataSet dataSet, string tableName)
         {
             String query = "";
@@ -97,6 +97,7 @@ namespace SimplicityReportTest
             if (isDebugMode)
                 textBox.Text += "\n\n" + SQLString;
             string url = auth.instance_url + "/services/data/v22.0/query?q=" + Server.UrlEncode(SQLString);
+
             System.Net.WebRequest req = System.Net.WebRequest.Create(url);
             req.Headers.Add("Authorization", "OAuth " + auth.access_token);
             WebResponse resp = null;
