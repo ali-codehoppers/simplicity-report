@@ -83,15 +83,15 @@ namespace SimplicityReportTest
         }
         protected override void OnInit(EventArgs e)
         {
-            base.OnInit(e);
+            base.OnInit(e); 
             CurrentEnvironment = Session["environment"].ToString().ToLower();
             Logger.LogInfoMessage(CurrentEnvironment);
-            if (CurrentEnvironment.Equals(Authenticate.SANDBOX))
+            if (CurrentEnvironment.Equals(Authenticate.SANDBOX)) // ager sand box hai to test environment pay lay jaye
             {
                 tokenUrl = Authenticate.ENVIRONMENT_TEST + "/services/oauth2/token";
                 Logger.LogInfoMessage(tokenUrl);
             }
-            else
+            else              // ager environment sand box nahi hai to production environment pay lay jaye
             {
                 tokenUrl = Authenticate.ENVIRONMENT_PROD + "/services/oauth2/token";
                 Logger.LogInfoMessage(tokenUrl);

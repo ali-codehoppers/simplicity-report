@@ -28,11 +28,11 @@ namespace SimplicityReportTest
         public const string AUTHENTICATED_ENVIRONMENT = "AUTHENTICATED_ENVIRONMENT";
 
         //public const string CONSUMER_KEY_PROD = "3MVG9PhR6g6B7ps7GQNDZr4rmxaW4mdiAu3gw6_Gx7tuHoxtVogYwBu65ke_6dKHkDf1dGq0ObPcyamtZG1qh";
-        public const string CONSUMER_KEY_PROD = "3MVG9yZ.WNe6byQCZHrdwlbkQ4G_HCtDcTIOR6E1zkuQjnuFvuugpGTpEPNX9yJ8olL5sjaDDUbkKdhv4Jwik";
-        
+        public const string CONSUMER_KEY_PROD = "3MVG9yZ.WNe6byQCZHrdwlbkQ4G_HCtDcTIOR6E1zkuQjnuFvuugpGTpEPNX9yJ8olL5sjaDDUbkKdhv4Jwik";//current
+        //public const string CONSUMER_KEY_PROD = "3MVG9Y6d_Btp4xp4gMMWuq_2pen5iegfqVf9IRMNFp7cSE8tNDHsFHcp8eycipTXs.NSED4VJIVCdCGm6lyka";//for local host
         //public const string CONSUMER_SECRET_PROD = "2756509967172651245";
-        public const string CONSUMER_SECRET_PROD = "7657890509844575091";
-        
+        public const string CONSUMER_SECRET_PROD = "7657890509844575091";//current
+        //public const string CONSUMER_SECRET_PROD = "689458311115334351";//for local host
         public const string ENVIRONMENT_PROD = "https://login.salesforce.com";
 
         //public const string REDIRECT_URL_PROD = "https://ec2-23-20-7-131.compute-1.amazonaws.com/SCReports/authenticate2.aspx";
@@ -59,45 +59,48 @@ namespace SimplicityReportTest
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Logger.LogInfoMessage("I am in Authenticate");
-            AuthenticationObject accessToken = (AuthenticationObject)Session[ACCESS_TOKEN];
-            Logger.LogInfoMessage("Access Token is:" + accessToken);
+
+
+            
+            Logger.LogInfoMessage("I am in Authenticate");   //DB main logging ker raha hai
+            AuthenticationObject accessToken = (AuthenticationObject)Session[ACCESS_TOKEN]; //Ager session start hai to access token null nahi hoga
+            Logger.LogInfoMessage("Access Token is:" + accessToken); //DB main logging ker raha hai access token ki
             if (accessToken == null)
             {
-                Logger.LogInfoMessage("Redirecting to:" + authenticateUrl);
+                Logger.LogInfoMessage("Redirecting to:" + authenticateUrl);  // ager session variable start nahi huwa to authenticate pay lay jaye gaa
                 Response.Redirect(authenticateUrl);
                 return;
             }
             else
             {
-                if (CurrentEnvironment.CompareTo(SANDBOX) == 0)
+                if (CurrentEnvironment.CompareTo(SANDBOX) == 0)       
                 {
-                    Response.Redirect(ConfigurationSettings.AppSettings["REDIRECT_URL"]);
+                    Response.Redirect(ConfigurationSettings.AppSettings["REDIRECT_URL"]); //
                 }
                 else
                 {
-                    Response.Redirect(ConfigurationSettings.AppSettings["REDIRECT_URL"]);
+                    Response.Redirect(ConfigurationSettings.AppSettings["REDIRECT_URL"]);  
                 }
                 return;
             }
         }
         protected override void OnInit(EventArgs e)
         {
-            base.OnInit(e);
-            CurrentEnvironment = Session["environment"].ToString().ToLower();
-            if (CurrentEnvironment.CompareTo(SANDBOX) == 0)
+            base.OnInit(e);  //initialize our base class (System.Web,UI.Page)
+            CurrentEnvironment = Session["environment"].ToString().ToLower();  //Put the anything saved in environment variable to current environment in currentenvironment variable
+            if (CurrentEnvironment.CompareTo(SANDBOX) == 0)  // if SANDBOX
             {
-                authenticateUrl = ENVIRONMENT_TEST
+                authenticateUrl = ENVIRONMENT_TEST         // take it to test environment
                         + "/services/oauth2/authorize?response_type=code&client_id="
                         + CONSUMER_KEY_TEST + "&redirect_uri="
-                        + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"], System.Text.Encoding.UTF8);
+                        + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"], System.Text.Encoding.UTF8);   // athenticate main test ki url rakh day ga
             }
             else
             {
-                authenticateUrl = ENVIRONMENT_PROD
+                authenticateUrl = ENVIRONMENT_PROD             //take it to production environment
                         + "/services/oauth2/authorize?response_type=code&client_id="
                         + CONSUMER_KEY_PROD + "&redirect_uri="
-                        + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"], System.Text.Encoding.UTF8);
+                        + HttpUtility.UrlEncode(ConfigurationSettings.AppSettings["REDIRECT_URL"], System.Text.Encoding.UTF8); // // athenticate main production ki url rakh day ga
             }
         }
 

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Xml;
+using System.Xml;  
 using CrystalDecisions.CrystalReports.Engine;
 
 namespace SimplicityReportTest
@@ -14,7 +14,7 @@ namespace SimplicityReportTest
     {
         public const string INVOICE_ID = "invoiceId";
         public const string Job_ID = "jobId";
-        public const string REPORT_TYPE = "reportType";
+        public const string REPORT_TYPE = "reportType";  
 
 
         private string reportType = "";
@@ -24,26 +24,26 @@ namespace SimplicityReportTest
         AuthenticationObject auth;
 
         private HashSet<Report> reportsHash = new HashSet<Report>();
-        private Dictionary<String, Report> reportsDict = new Dictionary<string, Report>();
-        String path = "C:\\SimplicityReportRecords";
-        System.IO.DirectoryInfo dir = null;
+        private Dictionary<String, Report> reportsDict = new Dictionary<string, Report>(); //Dictionary ko aik string jaye gee and report jaye gee
+        String path = "C:\\SimplicityReportRecords"; // reports ka path
+        System.IO.DirectoryInfo dir = null;       //Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
         private string RequestedEnvironment = "";
 
-        private List<ReportParameter> reportParameter = new List<ReportParameter>();
+        private List<ReportParameter> reportParameter = new List<ReportParameter>();  //list bana lee report parameter kii (parameter name and value)
         bool error = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session[Authenticate.CALLER_URL] = null;
+            Session[Authenticate.CALLER_URL] = null; 
             dsReport = new SimplicityDBSchema();
             dsTempReport = new DataSet();
 
-            if (Request["environment"] != null)
+            if (Request["environment"] != null) //request for page environment
             {
                 RequestedEnvironment = Request["environment"];
             }
             else
-                RequestedEnvironment = Authenticate.PRODUCTION;
+                RequestedEnvironment = Authenticate.PRODUCTION; //put production in requested Environment
 
 
             errorLabel.Text = "";
@@ -51,9 +51,9 @@ namespace SimplicityReportTest
                 TextBox1.Visible = true;
             try
             {
-                dir = new System.IO.DirectoryInfo(path);
+                dir = new System.IO.DirectoryInfo(path); //dir k ander reports ka path rakh day ga 
                 if (!dir.Exists)
-                    dir.Create();
+                    dir.Create(); 
 
             }
             catch (Exception ex)
@@ -61,7 +61,7 @@ namespace SimplicityReportTest
                 TextBox1.Text += "\n" + ex.Message;
             }
 
-            TextBox1.Text += "\nOutside auth";
+            TextBox1.Text += "\nOutside auth"; 
             auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];//////Taking Authentication from Session
             if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)////Check Authenticated and Environment
             {
