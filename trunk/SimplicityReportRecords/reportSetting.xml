@@ -153,37 +153,37 @@
         <Name>simplicity__objOrderInvoiceItems__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
-			<Parameter>
+          <Parameter>
             <Name>simplicity__objOrderInvoice__c</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
           </Parameter>
         </TableParameters>
       </Table>
-    <Table>
+      <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
-		<TableRelationParameters>
-			<Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__objOrderInvoice__c</TableName>
             <ParentFieldName>simplicity__objOrderDetails__c</ParentFieldName>
-			<ChildFieldName>Id</ChildFieldName>
+            <ChildFieldName>Id</ChildFieldName>
           </Parameter>
-		</TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__Job_Item__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
-				<TableRelationParameters>
-			<Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-			<ChildFieldName>simplicity__Job__c</ChildFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
           </Parameter>
-		</TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-	  
+
     </Tables>
   </Report>
   <Report>
@@ -232,11 +232,11 @@
         <TableParameters></TableParameters>
       </Table>
     </Tables>
-    </Report>
-	
-	  <Report>
-    <ID>A372A8CC-36A1-11E1-9011-43B44724019B</ID>
-     <Name>Invoice</Name>
+  </Report>
+
+  <Report>
+    <ID>EC6A5C5E-A312-11E1-B840-B1E36088709B</ID>
+    <Name>Invoice</Name>
     <RPTFileName>rptInvoice.rpt</RPTFileName>
     <ReportParameters>
       <Parameter>
@@ -254,7 +254,7 @@
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
       </Table>
-         <Table>
+      <Table>
         <Name>simplicity__objOrderInvoice__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
@@ -274,41 +274,41 @@
           </Parameter>
         </TableParameters>
       </Table>
-	     <Table>
+      <Table>
         <Name>simplicity__Trade_Code__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
       </Table>
-	       <Table>
+      <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
-		<TableRelationParameters>
-			<Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__objOrderInvoice__c</TableName>
             <ParentFieldName>simplicity__objOrderDetails__c</ParentFieldName>
-			<ChildFieldName>Id</ChildFieldName>
+            <ChildFieldName>Id</ChildFieldName>
           </Parameter>
-		</TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__Job_Item__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters></TableParameters>
-				<TableRelationParameters>
-			<Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-			<ChildFieldName>simplicity__Job__c</ChildFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
           </Parameter>
-		</TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-	  
+
     </Tables>
-    </Report>
-	
-	
-	  <Report>
+  </Report>
+
+
+  <Report>
     <ID>C9D70DB2-8D47-11E1-AD67-5882BAE59B18</ID>
     <Name>ConvertedtoJobTicket</Name>
     <RPTFileName>rptConvertedToJobTicket.rpt</RPTFileName>
@@ -322,37 +322,37 @@
         <Name>Account</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
-    <Parameter>
+          <Parameter>
             <Name>id</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
           </Parameter>
-  </TableParameters>
+        </TableParameters>
       </Table>
       <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>Account</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Client__c</ChildFieldName>
+            <ChildFieldName>simplicity__Client__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__Job_Item__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Job__c</ChildFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
     </Tables>
   </Report>
@@ -360,208 +360,304 @@
 
 
 
-  
+
   <Report>
     <ID>C3915A8E-8DE2-11E1-997A-3833BBE59B18</ID>
     <Name>EstimateSentToClient</Name>
     <RPTFileName>rptEstimateSentToClient.rpt</RPTFileName>
     <ReportParameters>
-	<Parameter>
+      <Parameter>
         <Name>accountId</Name>
       </Parameter>
-	  
+
     </ReportParameters>
     <Tables>
-	  <Table>
+      <Table>
         <Name>Account</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
-        <TableParameters><Parameter>
+        <TableParameters>
+          <Parameter>
             <Name>id</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
-          </Parameter></TableParameters>
+          </Parameter>
+        </TableParameters>
       </Table>
       <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>Account</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Client__c</ChildFieldName>
+            <ChildFieldName>simplicity__Client__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__Job_Item__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Job__c</ChildFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-      
+
     </Tables>
   </Report>
 
-  
-  
-    <Report>
+
+
+  <Report>
     <ID>C680C698-8F78-11E1-A175-25AABBE59B18</ID>
     <Name>OutstandingAppForPaymentAndInvoicesByClient</Name>
     <RPTFileName>rptOutstandingAppForPaymentAndInvoicesByClient.rpt</RPTFileName>
     <ReportParameters>
-	<Parameter>
+      <Parameter>
         <Name>accountId</Name>
       </Parameter>
-	  
+
     </ReportParameters>
     <Tables>
-	  <Table>
+      <Table>
         <Name>Account</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
-        <TableParameters><Parameter>
+        <TableParameters>
+          <Parameter>
             <Name>id</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
-          </Parameter></TableParameters>
+          </Parameter>
+        </TableParameters>
       </Table>
       <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>Account</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Client__c</ChildFieldName>
+            <ChildFieldName>simplicity__Client__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__objOrderInvoice__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__objOrderDetails__c</ChildFieldName>
+            <ChildFieldName>simplicity__objOrderDetails__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-      
-	        <Table>
+
+      <Table>
         <Name> simplicity__objOrderInvoiceEntries__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__objOrderInvoice__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__objOrderInvoice__c</ChildFieldName>
+            <ChildFieldName>simplicity__objOrderInvoice__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-	  
-	  
+
+
     </Tables>
   </Report>
 
- 
- 
 
-	    <Report>
+
+
+  <Report>
     <ID>C5B2ACE2-8FA3-11E1-8DF2-FCE7BBE59B18</ID>
     <Name>OutstandingEnquiriesBySurveyor</Name>
     <RPTFileName>rptOutstandingEnquiriesBySurveyor.rpt</RPTFileName>
     <ReportParameters>
-	<Parameter>
+      <Parameter>
         <Name>accountId</Name>
       </Parameter>
-	  
+
     </ReportParameters>
     <Tables>
-	  <Table>
+      <Table>
         <Name>Account</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
-        <TableParameters><Parameter>
+        <TableParameters>
+          <Parameter>
             <Name>id</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
-          </Parameter></TableParameters>
+          </Parameter>
+        </TableParameters>
       </Table>
       <Table>
         <Name>simplicity__Job__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>Account</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Client__c</ChildFieldName>
+            <ChildFieldName>simplicity__Client__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
       <Table>
         <Name>simplicity__Job_Item__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
         <TableParameters>
         </TableParameters>
-  <TableRelationParameters>
-   <Parameter>
+        <TableRelationParameters>
+          <Parameter>
             <TableName>simplicity__Job__c</TableName>
             <ParentFieldName>id</ParentFieldName>
-   <ChildFieldName>simplicity__Job__c</ChildFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
           </Parameter>
-  </TableRelationParameters>
+        </TableRelationParameters>
       </Table>
-      
+
     </Tables>
-	</Report>
-	
-	
-	
-	
-	
-	
-	
-	<Report>
-    <ID>EC6A5C5E-A312-11E1-B840-B1E36088709B</ID>
+  </Report>
+
+  <Report>
+    <ID>A372A8CC-36A1-11E1-9011-43B44724019B</ID>
     <Name>Invoice_WebProof</Name>
     <RPTFileName>rptInvoice_WebProof.rpt</RPTFileName>
     <ReportParameters>
-	
-	<Parameter>
-        <Name>invoice_no</Name>
+      <Parameter>
+        <Name>invoiceId</Name>
       </Parameter>
-	  
     </ReportParameters>
-    
-	<Tables>
-	  <Table>
+    <Tables>
+      <Table>
         <Name>simplicity__objOrderInvoice__c</Name>
         <UseDataSetSchema>true</UseDataSetSchema>
-        <TableParameters><Parameter>
-            <Name>id</Name>
+        <TableParameters>
+          <Parameter>
+            <Name>Id</Name>
             <ReportParameterIndex>1</ReportParameterIndex>
-          </Parameter></TableParameters>
+          </Parameter>
+        </TableParameters>
       </Table>
-      
+	  <Table>
+        <Name>simplicity__objOrderInvoiceItems__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+          <Parameter>
+            <Name>simplicity__objOrderInvoice__c</Name>
+            <ReportParameterIndex>1</ReportParameterIndex>
+          </Parameter>
+        </TableParameters>
+      </Table>
+       <Table>
+        <Name>simplicity__Job__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__objOrderInvoice__c</TableName>
+            <ParentFieldName>simplicity__objOrderDetails__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
+	  
+      <Table>
+        <Name>simplicity__Job_Item__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__Job__c</TableName>
+            <ParentFieldName>Id</ParentFieldName>
+            <ChildFieldName>simplicity__Job__c</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
+	  <Table>
+        <Name>simplicity__Job_Item__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__objOrderInvoiceItems__c</TableName>
+            <ParentFieldName>simplicity__objJobItem__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
+      <Table>
+        <Name>simplicity__Item_Unit__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__Job_Item__c</TableName>
+            <ParentFieldName>simplicity__strItemUnit__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
 
-	  
-	  
-      
+      <Table>
+        <Name>simplicity__Trade_Code__c</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__Job__c</TableName>
+            <ParentFieldName>simplicity__Trade_Code__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
+
+      <Table>
+        <Name>Account</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__Job__c</TableName>
+            <ParentFieldName>simplicity__Client__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
+      <Table>
+        <Name>Contact</Name>
+        <UseDataSetSchema>true</UseDataSetSchema>
+        <TableParameters>
+        </TableParameters>
+        <TableRelationParameters>
+          <Parameter>
+            <TableName>simplicity__Job__c</TableName>
+            <ParentFieldName>simplicity__Contact__c</ParentFieldName>
+            <ChildFieldName>Id</ChildFieldName>
+          </Parameter>
+        </TableRelationParameters>
+      </Table>
     </Tables>
   </Report>
-	
-	
 </Reports>
