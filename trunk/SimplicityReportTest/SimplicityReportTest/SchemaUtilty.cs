@@ -13,7 +13,7 @@ namespace SimplicityReportTest
 {
     public class SchemaUtilty
     {
-        public static bool isDebugMode = true;
+        public static bool isDebugMode = false;
         public static String GetFullQueryString(DataSet dataSet, string tableName)
         {
             String query = "";
@@ -169,6 +169,98 @@ namespace SimplicityReportTest
 
         }
 
+        public static bool PopulateDataSet(HttpServerUtility Server, AuthenticationObject auth,String tableRelation,String tableName, DataSet dataSet, String reportTable,List<ReportParameter> reportParameters,  TextBox textBox)
+        {
+
+            DataSet ds;
+            String SQLString = reportTable;
+            if (isDebugMode)
+                textBox.Text += "\n\n" + SQLString;
+            string url = auth.instance_url + "/services/data/v22.0/query?q=" + Server.UrlEncode(SQLString);
+
+                System.Net.WebRequest req = System.Net.WebRequest.Create(url);
+                req.Headers.Add("Authorization", "OAuth " + auth.access_token);
+                WebResponse resp = null;
+                try
+                {
+                    resp = req.GetResponse();
+                    if (resp != null)
+                    {
+                        ds = new DataSet();
+                        System.IO.StreamReader sr = new System.IO.StreamReader(resp.GetResponseStream());
+                        XmlDocument doc = (XmlDocument)JsonConvert.DeserializeXmlNode(sr.ReadToEnd().Trim(), tableName);
+                        if (!tableRelation.Trim().Equals("Empty"))
+                            doc.SelectNodes(tableRelation);
+                        StringReader stringReader = new StringReader(doc.OuterXml);
+                        if (isDebugMode)
+                            textBox.Text += doc.OuterXml + "\n\n\n";
+
+                        ds.ReadXml(stringReader, XmlReadMode.InferSchema);
+
+                        if (ds.Tables.Count > 1)
+                        {
+                            if (!tableRelation.Trim().Equals("Empty"))
+                            {
+                                textBox.Text += "Relation="+tableRelation + "\n\n\n";
+                                if (ds.Tables[tableRelation] != null)
+                                    dataSet.Tables[tableName].Merge(ds.Tables[tableRelation], true, MissingSchemaAction.Ignore);
+                            }
+                            else
+                            {
+                                if (ds.Tables[1]!= null)
+                                    dataSet.Tables[tableName].Merge(ds.Tables[1], true, MissingSchemaAction.Ignore);
+                            }
+                        }
+                        if (isDebugMode)
+                        {
+                            if (ds.Tables.Count > 1)
+                            {
+                                textBox.Text += ds.Tables[1].Rows.Count.ToString() + " Records\n";
+                                for (int j = 0; j < ds.Tables[1].Rows.Count; j++)
+                                {
+                                    for (int i = 0; i < ds.Tables[1].Rows[j].ItemArray.Count(); i++)
+                                    {
+                                        textBox.Text += ds.Tables[1].Columns[i].ColumnName + ":\t\t" + ds.Tables[1].Rows[j].ItemArray[i] + "\n";
+                                        //textBox.Text += dataSet.Tables[tableName].Columns[ds.Tables[tableName].Columns[i].ColumnName].ColumnName + "\t\t" + ds.Tables[tableName].Rows[j].ItemArray[i] + "   \n";
+                                    }
+                                    textBox.Text += "\n\n";
+                                }
+                            }
+                            textBox.Text += "\nActual DataSet\n";
+                            for (int j = 0; j < dataSet.Tables[tableName].Rows.Count; j++)
+                            {
+                                for (int i = 0; i < dataSet.Tables[tableName].Rows[j].ItemArray.Count(); i++)
+                                {
+                                    textBox.Text += "ORG: " + dataSet.Tables[tableName].Columns[i].ColumnName + ":\t\t" + dataSet.Tables[tableName].Rows[j].ItemArray[i] + "\n";
+                                    //textBox.Text += dataSet.Tables[tableName].Columns[ds.Tables[tableName].Columns[i].ColumnName].ColumnName + "\t\t" + ds.Tables[tableName].Rows[j].ItemArray[i] + "   \n";
+                                }
+                                textBox.Text += "\n\n";
+                            }
+                        }
+                    }
+                }
+                catch (WebException ex)
+                {
+                    Logger.LogInfoMessage(ex.Message);
+                    if (ex.Response != null)
+                    {
+                        System.IO.StreamReader sr = new System.IO.StreamReader(ex.Response.GetResponseStream());
+                        Logger.LogInfoMessage(sr.ReadToEnd().Trim());
+                    }
+                    Logger.LogInfoMessage("There is a WEB EXCEPTION");
+                    textBox.Text += ex.Message + "\n\n\n";
+                    return false;
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogInfoMessage(ex.Message);
+                    textBox.Text += ex.Message + "\n\n\n";
+                    return false;
+                }
+            
+            return true;
+
+        }
 
         public static bool PopulateDataSet(HttpServerUtility Server, AuthenticationObject auth, DataSet dataSet, string tableName, string condition, TextBox textBox)
         {

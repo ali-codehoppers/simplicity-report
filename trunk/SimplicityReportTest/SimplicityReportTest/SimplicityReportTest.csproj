@@ -114,6 +114,7 @@
     <Content Include="Library\Newtonsoft.Json.Net35.dll" />
     <Content Include="Model1.edmx.sql" />
     <Content Include="ShowReport.aspx" />
+    <Content Include="ShowResult.aspx" />
     <Content Include="SimplicityReports2.csproj" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -167,6 +168,17 @@
     </Compile>
     <Compile Include="ShowReport.aspx.designer.cs">
       <DependentUpon>ShowReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ShowResult.aspx.cs">
+      <DependentUpon>ShowResult.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowResult.aspx.designer.cs">
+      <DependentUpon>ShowResult.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SimplicityDBSchema.cs">
+      <DependentUpon>SimplicityDBSchema.xsd</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="SimplicityDBSchema.Designer.cs">
       <AutoGen>True</AutoGen>

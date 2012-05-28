@@ -13,6 +13,10 @@ namespace SimplicityReportTest
 
         public List<ReportTable> Tables { get; set; }
 
+        public List<String> Table { get; set; }
+        public List<String> TableName { get; set; }
+        public List<String> TableRelation { get; set; }
+
         public List<ReportParameter> ReportParamaters
         {
             get;
@@ -21,6 +25,9 @@ namespace SimplicityReportTest
 
         public Report()
         {
+            Table = new List<String>();
+            TableName = new List<String>();
+            TableRelation = new List<String>();
             Tables = new List<ReportTable>();
             ReportParamaters = new List<ReportParameter>();
         }

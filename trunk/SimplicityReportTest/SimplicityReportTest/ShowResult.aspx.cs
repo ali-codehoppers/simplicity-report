@@ -5,16 +5,17 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Xml;  
 using CrystalDecisions.CrystalReports.Engine;
+using System.Xml;
+using System.Text.RegularExpressions;
 
 namespace SimplicityReportTest
 {
-    public partial class ShowReport : System.Web.UI.Page
+    public partial class ShowResult : System.Web.UI.Page
     {
         public const string INVOICE_ID = "invoiceId";
         public const string Job_ID = "jobId";
-        public const string REPORT_TYPE = "reportType";  
+        public const string REPORT_TYPE = "reportType";
 
 
         private string reportType = "";
@@ -34,7 +35,7 @@ namespace SimplicityReportTest
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session[Authenticate.CALLER_URL] = null; 
+            Session[Authenticate.CALLER_URL] = null;
             dsReport = new SimplicityDBSchema();
             dsTempReport = new DataSet();
 
@@ -48,14 +49,14 @@ namespace SimplicityReportTest
 
             errorLabel.Text = "";
             //if (Request["environment"].CompareTo("SANDBOX") == 0)
-                if (SchemaUtilty.isDebugMode)
-                    TextBox1.Visible = true;
-            
+            if (SchemaUtilty.isDebugMode)
+                TextBox1.Visible = true;
+
             try
             {
                 dir = new System.IO.DirectoryInfo(path); //dir k ander reports ka path rakh day ga 
                 if (!dir.Exists)
-                    dir.Create(); 
+                    dir.Create();
 
             }
             catch (Exception ex)
@@ -63,7 +64,7 @@ namespace SimplicityReportTest
                 TextBox1.Text += "\n" + ex.Message;
             }
 
-            TextBox1.Text += "\nOutside auth"; 
+            TextBox1.Text += "\nOutside auth";
             auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];//////Taking Authentication from Session
             if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)////Check Authenticated and Environment
             {
@@ -71,48 +72,51 @@ namespace SimplicityReportTest
                 reportType = Request[REPORT_TYPE];
                 if (reportType != null && reportType.Length > 0)
                 {
-                    if (reportType.Equals("A372A8CC-36A1-11E1-9011-43B44724019B"))
-                        Response.Redirect("ShowResult.aspx?" + Request.QueryString.ToString());
                     TextBox1.Text += "\nInside report Type " + reportType;
-                    ReadXMLConfiguration();
+                    ReadXMLConfiguration(reportType);
 
                     if (reportsDict.ContainsKey(reportType))
                     {
                         Report report = reportsDict[reportType];
-                        TextBox1.Text += "\nReport_TYPE" + reportType;
+                        TextBox1.Text += "\nReport_TYPE " + reportType;
 
-                        foreach (ReportParameter param in report.ReportParamaters)
+
+                        for (int iterate = 0; iterate < report.Table.Count;iterate++ )
                         {
-                            ReportParameter temp_param = new ReportParameter();
-                            temp_param.ParameterName = param.ParameterName;
-                            if (Request[param.ParameterName] != null)
+                            try
                             {
-                                temp_param.Value = Request[param.ParameterName];
-                                reportParameter.Add(temp_param);
-                                TextBox1.Text += "\n" + temp_param.ParameterName + " = " + temp_param.Value;
+                                String table = report.Table[iterate];
+
+                                var result = Regex.Matches(table, "##(.*?)##");
+                                foreach (Match match in result)
+                                {
+                                    if (Request[match.Groups[1].Value] != null)
+                                    {
+                                        table = table.Replace("##" + match.Groups[1].Value + "##", Request[match.Groups[1].Value]);
+                                    }
+                                    else
+                                    {
+                                        error = true;
+                                        ShowError("Missing report parameter " + match.Groups[1].Value);
+                                        return;
+                                    }
+
+                                }
+
+
+                                String tableName = report.TableName[iterate];
+                                String tableRelation = report.TableRelation[iterate];
+
+                                SchemaUtilty.PopulateDataSet(Page.Server, auth, tableRelation, tableName, dsReport, table, reportParameter, TextBox1);
+
                             }
-                            else
+                            catch (Exception ex)
                             {
-                                error = true;
-                                ShowError("Missing report parameter " + temp_param.ParameterName);
+                                TextBox1.Text += "\n" + ex.Message;
+                                TextBox1.Text += "\n" + ex.StackTrace;
                             }
+
                         }
-
-                        if (!error)
-                        {
-                            foreach (ReportTable table in report.Tables)
-                            {
-                                try
-                                {
-                                    SchemaUtilty.PopulateDataSet(Page.Server, auth, dsReport, table, reportParameter, TextBox1);
-                                }
-                                catch (Exception ex)
-                                {
-                                    TextBox1.Text += "\n" + ex.Message;
-                                    TextBox1.Text += "\n" + ex.StackTrace;
-                                }
-
-                            }
 
                             ReportDocument ReportDoc = new ReportDocument();
                             ReportDoc.Load(dir + "\\Reports\\" + report.RPTFileName);
@@ -122,7 +126,7 @@ namespace SimplicityReportTest
                             MyCrystalReportViewer.RefreshReport();
                             MyCrystalReportViewer.Visible = true;
                             TextBox1.Text += "\n Reports Loaded ";
-                        }
+                       // }
 
 
                     }
@@ -151,7 +155,7 @@ namespace SimplicityReportTest
             }
         }
 
-        private bool ReadXMLConfiguration()
+        private bool ReadXMLConfiguration(String reportType)
         {
             //String folderPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
             //TextBox1.Text += folderPath;
@@ -163,9 +167,9 @@ namespace SimplicityReportTest
 
             try
             {
-                XmlTextReader reader = new XmlTextReader(dir.FullName + "\\reportSetting.xml");
+                XmlTextReader reader = new XmlTextReader(dir.FullName + "\\" + reportType + ".xml");
                 String value = null;
-                TextBox1.Text += dir.FullName + "\\reportSetting.xml";
+                TextBox1.Text += dir.FullName + "\\"+ reportType +".xml";
                 Report report = null;
                 ReportTable reportTable = null;
                 ReportTableParameter tableParam = null;
@@ -187,16 +191,6 @@ namespace SimplicityReportTest
                                 isReadingReportParameter = true;
                                 TextBox1.Text += "\n <ReportParameters>";
                             }
-                            else if (reader.Name == "TableParameters")
-                            {
-                                isReadingTableParameter = true;
-                                TextBox1.Text += "\n <TableParameters>";
-                            }
-                            else if (reader.Name == "TableRelationParameters")
-                            {
-                                isReadingTableRelationParameter = true;
-                                TextBox1.Text += "\n <TableRelationParameters>";
-                            }
                             else if (reader.Name == "Table")
                             {
                                 //isReadingTableParameter = true;
@@ -204,7 +198,6 @@ namespace SimplicityReportTest
                                 reportTable = new ReportTable();
                                 TextBox1.Text += "\n <Table>";
                             }
-
                             else if (reader.Name == "Parameter")
                             {
                                 if (isReadingReportParameter)
@@ -215,7 +208,6 @@ namespace SimplicityReportTest
                                     tableParam = new ReportTableParameter();
                                 TextBox1.Text += "\n <Parameter>";
                             }
-
                             break;
                         case XmlNodeType.Text: //Display the text in each element.
                             value = reader.Value;
@@ -241,28 +233,14 @@ namespace SimplicityReportTest
                                 else if (isReadingTableParameter)
                                     tableParam.ColumnName = value;
                                 else if (isReadingTables)
-                                    reportTable.Name = value;
+                                    report.TableName.Add(value);
                                 TextBox1.Text += "\n <Name>" + value + "</Name>";
 
                             }
-                            else if (reader.Name == "TableName")
+                            else if (reader.Name == "RelationName")
                             {
-                                rtrParameter.TableName = value;
-                            }
-                            else if (reader.Name == "ParentFieldName")
-                            {
-                                rtrParameter.ParentColumnName = value;
-                            }
-                            else if (reader.Name == "ChildFieldName")
-                            {
-                                rtrParameter.ChildColumnName = value;
-                            }
-                            else if (reader.Name == "ReportParameterIndex")
-                            {
-                                int val = 0;
-                                int.TryParse(value, out val);
-                                tableParam.ReportParameterIndex = val;
-                                TextBox1.Text += "\n <ReportParameterIndex>" + value + "</ReportParameterIndex>";
+                                report.TableRelation.Add(value);
+                                TextBox1.Text += "\n <RelationName>" + value + "</RelationName>";
                             }
                             else if (reader.Name == "UseDataSetSchema")
                             {
@@ -276,10 +254,16 @@ namespace SimplicityReportTest
                                 report.RPTFileName = value;
                                 TextBox1.Text += "\n <RPTFileName>" + value + "</RPTFileName>";
                             }
-
+                            else if (reader.Name == "Querry")
+                            {
+                                //report.Tables.Add(reportTable);
+                                report.Table.Add(value);
+                                TextBox1.Text += "\n <Querry>" + value + "</Querry>";
+                            }
                             else if (reader.Name == "Table")
                             {
-                                report.Tables.Add(reportTable);
+                                //report.Tables.Add(reportTable);
+                                //report.Table.Add(value);
                                 isReadingTables = false;
                                 TextBox1.Text += "\n </Table>";
                             }
@@ -292,16 +276,6 @@ namespace SimplicityReportTest
                                 else
                                     reportTable.TableParameters.Add(tableParam);
                                 TextBox1.Text += "\n </Parameter>";
-                            }
-                            else if (reader.Name == "TableParameters")
-                            {
-                                isReadingTableParameter = false;
-                                TextBox1.Text += "\n </TableParameters>";
-                            }
-                            else if (reader.Name == "TableRelationParameters")
-                            {
-                                isReadingTableRelationParameter = false;
-                                TextBox1.Text += "\n </TableRelationParameters>";
                             }
                             else if (reader.Name == "ReportParameters")
                             {
