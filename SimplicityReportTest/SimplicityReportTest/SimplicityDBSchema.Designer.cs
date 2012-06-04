@@ -1745,7 +1745,7 @@ namespace SimplicityReportTest {
                         string simplicity__curTotalVOSchedItemRollUps__c, 
                         string simplicity__curTotal__c, 
                         string simplicity__datConvertToJobTicket__c, 
-                        string simplicity__datDateCreated__c, 
+                        System.DateTime simplicity__datDateCreated__c, 
                         string simplicity__dblPcentOrderCompleted__c, 
                         string simplicity__dblPcentOrderDiscount__c, 
                         string simplicity__dblPcentOrderRetention__c, 
@@ -2114,7 +2114,7 @@ namespace SimplicityReportTest {
                 base.Columns.Add(this.columnsimplicity__curTotal__c);
                 this.columnsimplicity__datConvertToJobTicket__c = new global::System.Data.DataColumn("simplicity__datConvertToJobTicket__c", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__datConvertToJobTicket__c);
-                this.columnsimplicity__datDateCreated__c = new global::System.Data.DataColumn("simplicity__datDateCreated__c", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsimplicity__datDateCreated__c = new global::System.Data.DataColumn("simplicity__datDateCreated__c", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__datDateCreated__c);
                 this.columnsimplicity__dblPcentOrderCompleted__c = new global::System.Data.DataColumn("simplicity__dblPcentOrderCompleted__c", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__dblPcentOrderCompleted__c);
@@ -4805,7 +4805,7 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public simplicity__Trade_Code__cRow Addsimplicity__Trade_Code__cRow(string Id, string simplicity__Description__c, string OwnerId, string IsDeleted, string Name, string CreatedDate, string CreatedById, string LastModifiedDate, string LastModifiedById, string SystemModstamp, string simplicity__Grouping__c, string simplicity__Sort_Order__c) {
+            public simplicity__Trade_Code__cRow Addsimplicity__Trade_Code__cRow(string Id, string simplicity__Description__c, string OwnerId, string IsDeleted, string Name, System.DateTime CreatedDate, string CreatedById, string LastModifiedDate, string LastModifiedById, string SystemModstamp, string simplicity__Grouping__c, string simplicity__Sort_Order__c) {
                 simplicity__Trade_Code__cRow rowsimplicity__Trade_Code__cRow = ((simplicity__Trade_Code__cRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Id,
@@ -4869,7 +4869,7 @@ namespace SimplicityReportTest {
                 base.Columns.Add(this.columnIsDeleted);
                 this.columnName = new global::System.Data.DataColumn("Name", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnName);
-                this.columnCreatedDate = new global::System.Data.DataColumn("CreatedDate", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCreatedDate = new global::System.Data.DataColumn("CreatedDate", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCreatedDate);
                 this.columnCreatedById = new global::System.Data.DataColumn("CreatedById", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCreatedById);
@@ -5105,6 +5105,8 @@ namespace SimplicityReportTest {
             private global::System.Data.DataColumn columnsimplicity__SLASerialNumber__c;
             
             private global::System.Data.DataColumn columnsimplicity__SLA__c;
+            
+            private global::System.Data.DataColumn columnsimplicity_Currency_Symbols__c;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
@@ -5501,6 +5503,14 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn simplicity_Currency_Symbols__cColumn {
+                get {
+                    return this.columnsimplicity_Currency_Symbols__c;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -5581,7 +5591,8 @@ namespace SimplicityReportTest {
                         string simplicity__strSAGE_NominalCodeClient__c, 
                         string simplicity__SLAExpirationDate__c, 
                         string simplicity__SLASerialNumber__c, 
-                        string simplicity__SLA__c) {
+                        string simplicity__SLA__c, 
+                        string simplicity_Currency_Symbols__c) {
                 AccountRow rowAccountRow = ((AccountRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Id,
@@ -5628,7 +5639,8 @@ namespace SimplicityReportTest {
                         simplicity__strSAGE_NominalCodeClient__c,
                         simplicity__SLAExpirationDate__c,
                         simplicity__SLASerialNumber__c,
-                        simplicity__SLA__c};
+                        simplicity__SLA__c,
+                        simplicity_Currency_Symbols__c};
                 rowAccountRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowAccountRow);
                 return rowAccountRow;
@@ -5696,6 +5708,7 @@ namespace SimplicityReportTest {
                 this.columnsimplicity__SLAExpirationDate__c = base.Columns["simplicity__SLAExpirationDate__c"];
                 this.columnsimplicity__SLASerialNumber__c = base.Columns["simplicity__SLASerialNumber__c"];
                 this.columnsimplicity__SLA__c = base.Columns["simplicity__SLA__c"];
+                this.columnsimplicity_Currency_Symbols__c = base.Columns["simplicity_Currency_Symbols__c"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -5791,6 +5804,8 @@ namespace SimplicityReportTest {
                 base.Columns.Add(this.columnsimplicity__SLASerialNumber__c);
                 this.columnsimplicity__SLA__c = new global::System.Data.DataColumn("simplicity__SLA__c", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__SLA__c);
+                this.columnsimplicity_Currency_Symbols__c = new global::System.Data.DataColumn("simplicity_Currency_Symbols__c", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnsimplicity_Currency_Symbols__c);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -6317,7 +6332,7 @@ namespace SimplicityReportTest {
                         string SystemModstamp, 
                         bool simplicity__boolInvoiceIsVAT_Only__c, 
                         bool simplicity__boolRetention__c, 
-                        string simplicity__datInvoiceDate__c, 
+                        System.DateTime simplicity__datInvoiceDate__c, 
                         string simplicity__datRetentionEnd__c, 
                         string simplicity__datRetentionStart__c, 
                         simplicity__Job__cRow parentsimplicity__Job__cRowBysimplicity__Job__c_simplicity__objOrderInvoice__c, 
@@ -6454,7 +6469,7 @@ namespace SimplicityReportTest {
                 base.Columns.Add(this.columnsimplicity__boolInvoiceIsVAT_Only__c);
                 this.columnsimplicity__boolRetention__c = new global::System.Data.DataColumn("simplicity__boolRetention__c", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__boolRetention__c);
-                this.columnsimplicity__datInvoiceDate__c = new global::System.Data.DataColumn("simplicity__datInvoiceDate__c", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnsimplicity__datInvoiceDate__c = new global::System.Data.DataColumn("simplicity__datInvoiceDate__c", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__datInvoiceDate__c);
                 this.columnsimplicity__datRetentionEnd__c = new global::System.Data.DataColumn("simplicity__datRetentionEnd__c", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsimplicity__datRetentionEnd__c);
@@ -10267,10 +10282,10 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string simplicity__datDateCreated__c {
+            public System.DateTime simplicity__datDateCreated__c {
                 get {
                     try {
-                        return ((string)(this[this.tablesimplicity__Job__c.simplicity__datDateCreated__cColumn]));
+                        return ((global::System.DateTime)(this[this.tablesimplicity__Job__c.simplicity__datDateCreated__cColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'simplicity__datDateCreated__c\' in table \'simplicity__Job__c" +
@@ -15264,10 +15279,10 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string CreatedDate {
+            public System.DateTime CreatedDate {
                 get {
                     try {
-                        return ((string)(this[this.tablesimplicity__Trade_Code__c.CreatedDateColumn]));
+                        return ((global::System.DateTime)(this[this.tablesimplicity__Trade_Code__c.CreatedDateColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'CreatedDate\' in table \'simplicity__Trade_Code__c\' is DBNull" +
@@ -16277,6 +16292,23 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string simplicity_Currency_Symbols__c {
+                get {
+                    try {
+                        return ((string)(this[this.tableAccount.simplicity_Currency_Symbols__cColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'simplicity_Currency_Symbols__c\' in table \'Account\' is DBNul" +
+                                "l.", e);
+                    }
+                }
+                set {
+                    this[this.tableAccount.simplicity_Currency_Symbols__cColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsIdNull() {
                 return this.IsNull(this.tableAccount.IdColumn);
             }
@@ -16817,6 +16849,18 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool Issimplicity_Currency_Symbols__cNull() {
+                return this.IsNull(this.tableAccount.simplicity_Currency_Symbols__cColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void Setsimplicity_Currency_Symbols__cNull() {
+                this[this.tableAccount.simplicity_Currency_Symbols__cColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public simplicity__Job__cRow[] Getsimplicity__Job__cRows() {
                 if ((this.Table.ChildRelations["Account_simplicity__Job__c"] == null)) {
                     return new simplicity__Job__cRow[0];
@@ -17067,10 +17111,10 @@ namespace SimplicityReportTest {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string simplicity__datInvoiceDate__c {
+            public System.DateTime simplicity__datInvoiceDate__c {
                 get {
                     try {
-                        return ((string)(this[this.tablesimplicity__objOrderInvoice__c.simplicity__datInvoiceDate__cColumn]));
+                        return ((global::System.DateTime)(this[this.tablesimplicity__objOrderInvoice__c.simplicity__datInvoiceDate__cColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'simplicity__datInvoiceDate__c\' in table \'simplicity__objOrd" +

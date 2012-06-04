@@ -13,7 +13,7 @@ namespace SimplicityReportTest
 {
     public class SchemaUtilty
     {
-        public static bool isDebugMode = false;
+        public static bool isDebugMode = true;
         public static String GetFullQueryString(DataSet dataSet, string tableName)
         {
             String query = "";
