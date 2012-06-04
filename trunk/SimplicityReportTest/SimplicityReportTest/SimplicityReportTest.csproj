@@ -113,6 +113,7 @@
     <Content Include="Default.aspx" />
     <Content Include="Library\Newtonsoft.Json.Net35.dll" />
     <Content Include="Model1.edmx.sql" />
+    <Content Include="ShowQueries.aspx" />
     <Content Include="ShowReport.aspx" />
     <Content Include="ShowResult.aspx" />
     <Content Include="SimplicityReports2.csproj" />
@@ -162,6 +163,13 @@
     <Compile Include="ReportTable.cs" />
     <Compile Include="ReportTableRelationParameter.cs" />
     <Compile Include="SchemaUtilty.cs" />
+    <Compile Include="ShowQueries.aspx.cs">
+      <DependentUpon>ShowQueries.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ShowQueries.aspx.designer.cs">
+      <DependentUpon>ShowQueries.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ShowReport.aspx.cs">
       <DependentUpon>ShowReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
