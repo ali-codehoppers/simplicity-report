@@ -113,7 +113,11 @@
     <Content Include="Default.aspx" />
     <Content Include="Library\Newtonsoft.Json.Net35.dll" />
     <Content Include="Model1.edmx.sql" />
+<<<<<<< .mine
+    <Content Include="ReportSchema.aspx" />
+=======
     <Content Include="ShowQueries.aspx" />
+>>>>>>> .r25
     <Content Include="ShowReport.aspx" />
     <Content Include="ShowResult.aspx" />
     <Content Include="SimplicityReports2.csproj" />
@@ -143,6 +147,13 @@
       <DependentUpon>Authenticate2.aspx</DependentUpon>
     </Compile>
     <Compile Include="AuthenticationObject.cs" />
+    <Compile Include="ReportSchema.aspx.cs">
+      <DependentUpon>ReportSchema.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ReportSchema.aspx.designer.cs">
+      <DependentUpon>ReportSchema.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ReportTableParameter.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
