@@ -28,6 +28,7 @@ namespace SimplicityReportTest
         private Dictionary<String, Report> reportsDict = new Dictionary<string, Report>(); //Dictionary ko aik string jaye gee and report jaye gee
         String path = "C:\\SimplicityReportRecords"; // reports ka path
         System.IO.DirectoryInfo dir = null;       //Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
+        System.IO.DirectoryInfo dirSchema = null;
         private string RequestedEnvironment = "";
 
         private List<ReportParameter> reportParameter = new List<ReportParameter>();  //list bana lee report parameter kii (parameter name and value)
@@ -58,6 +59,10 @@ namespace SimplicityReportTest
                 if (!dir.Exists)
                     dir.Create();
 
+                dirSchema = new System.IO.DirectoryInfo(path + @"\Upload"); //dir k ander reports ka path rakh day ga 
+                if (!dirSchema.Exists)
+                    dirSchema.Create();
+
             }
             catch (Exception ex)
             {
@@ -80,7 +85,7 @@ namespace SimplicityReportTest
                         Report report = reportsDict[reportType];
                         TextBox1.Text += "\nReport_TYPE " + reportType;
 
-
+                        DataSet reportDataSet = new DataSet("SimplicityDBSchema");
                         for (int iterate = 0; iterate < report.Table.Count;iterate++ )
                         {
                             try
@@ -106,8 +111,8 @@ namespace SimplicityReportTest
 
                                 String tableName = report.TableName[iterate];
                                 String tableRelation = report.TableRelation[iterate];
-
-                                SchemaUtilty.PopulateDataSet(Page.Server, auth, tableRelation, tableName, dsReport, table, reportParameter, TextBox1);
+                                SchemaUtilty.CreateDataSet(Page.Server, path, auth, tableName, reportDataSet, TextBox1);
+                                SchemaUtilty.PopulateDataSet(Page.Server, auth, tableRelation, tableName, reportDataSet, table, reportParameter, TextBox1);
 
                             }
                             catch (Exception ex)
@@ -118,9 +123,13 @@ namespace SimplicityReportTest
 
                         }
 
+
+
+                        reportDataSet.WriteXmlSchema(dirSchema.FullName + @"\SimplicityDBSchema.xsd");
+
                             ReportDocument ReportDoc = new ReportDocument();
                             ReportDoc.Load(dir + "\\Reports\\" + report.RPTFileName);
-                            ReportDoc.SetDataSource(dsReport);
+                            ReportDoc.SetDataSource(reportDataSet);
 
                             MyCrystalReportViewer.ReportSource = ReportDoc;
                             MyCrystalReportViewer.RefreshReport();

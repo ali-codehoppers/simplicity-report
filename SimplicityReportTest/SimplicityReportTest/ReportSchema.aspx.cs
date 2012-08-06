@@ -5,16 +5,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data;
-using System.Xml;  
+using System.Text.RegularExpressions;
 using CrystalDecisions.CrystalReports.Engine;
+using System.Xml;
+using System.Net;
+using System.IO;
 
 namespace SimplicityReportTest
 {
-    public partial class ShowReport : System.Web.UI.Page
+    public partial class ReportSchema : System.Web.UI.Page
     {
         public const string INVOICE_ID = "invoiceId";
         public const string Job_ID = "jobId";
-        public const string REPORT_TYPE = "reportType";  
+        public const string REPORT_TYPE = "reportType";
 
 
         private string reportType = "";
@@ -27,6 +30,7 @@ namespace SimplicityReportTest
         private Dictionary<String, Report> reportsDict = new Dictionary<string, Report>(); //Dictionary ko aik string jaye gee and report jaye gee
         String path = "C:\\SimplicityReportRecords"; // reports ka path
         System.IO.DirectoryInfo dir = null;       //Exposes instance methods for creating, moving, and enumerating through directories and subdirectories. This class cannot be inherited.
+        System.IO.DirectoryInfo dirSchema = null;
         private string RequestedEnvironment = "";
 
         private List<ReportParameter> reportParameter = new List<ReportParameter>();  //list bana lee report parameter kii (parameter name and value)
@@ -34,112 +38,16 @@ namespace SimplicityReportTest
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Session[Authenticate.CALLER_URL] = null; 
-            dsReport = new SimplicityDBSchema();
-            dsTempReport = new DataSet();
-
             if (Request["environment"] != null) //request for page environment
             {
                 RequestedEnvironment = Request["environment"];
             }
             else
                 RequestedEnvironment = Authenticate.PRODUCTION; //put production in requested Environment
-
-
-            errorLabel.Text = "";
-            //if (Request["environment"].CompareTo("SANDBOX") == 0)
-                if (SchemaUtilty.isDebugMode)
-                    TextBox1.Visible = true;
-            
-            try
-            {
-                dir = new System.IO.DirectoryInfo(path); //dir k ander reports ka path rakh day ga 
-                if (!dir.Exists)
-                    dir.Create(); 
-
-            }
-            catch (Exception ex)
-            {
-                TextBox1.Text += "\n" + ex.Message;
-            }
-
-            TextBox1.Text += "\nOutside auth"; 
             auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];//////Taking Authentication from Session
             if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)////Check Authenticated and Environment
-            {
-                TextBox1.Text += "\nInside auth";
-                reportType = Request[REPORT_TYPE];
-                if (reportType != null && reportType.Length > 0)
-                {
-                    if (reportType.Equals("A372A8CC-36A1-11E1-9011-43B44724019B") || reportType.Equals("6ef14e46-7c87-4b05-b5f6-25b9c9fa2254") || reportType.Equals("d647d86b-07ce-4403-85d3-7f2ae2442c50") || reportType.Equals("58285e53-edb6-4b9b-936c-0f327da8a451") || reportType.Equals("845b72ec-90ab-493b-9e66-355a3ee62b99") || reportType.Equals("27356f2b-0a23-45c4-8600-842ea839f318"))
-                        Response.Redirect("ShowResult.aspx?" + Request.QueryString.ToString());
-                    TextBox1.Text += "\nInside report Type " + reportType;
-                    ReadXMLConfiguration();
-
-                    if (reportsDict.ContainsKey(reportType))
-                    {
-                        Report report = reportsDict[reportType];
-                        TextBox1.Text += "\nReport_TYPE" + reportType;
-
-                        foreach (ReportParameter param in report.ReportParamaters)
-                        {
-                            ReportParameter temp_param = new ReportParameter();
-                            temp_param.ParameterName = param.ParameterName;
-                            if (Request[param.ParameterName] != null)
-                            {
-                                temp_param.Value = Request[param.ParameterName];
-                                reportParameter.Add(temp_param);
-                                TextBox1.Text += "\n" + temp_param.ParameterName + " = " + temp_param.Value;
-                            }
-                            else
-                            {
-                                error = true;
-                                ShowError("Missing report parameter " + temp_param.ParameterName);
-                            }
-                        }
-
-                        if (!error)
-                        {
-                            foreach (ReportTable table in report.Tables)
-                            {
-                                try
-                                {
-                                    SchemaUtilty.PopulateDataSet(Page.Server, auth, dsReport, table, reportParameter, TextBox1);
-                                }
-                                catch (Exception ex)
-                                {
-                                    TextBox1.Text += "\n" + ex.Message;
-                                    TextBox1.Text += "\n" + ex.StackTrace;
-                                }
-
-                            }
-
-                            ReportDocument ReportDoc = new ReportDocument();
-                            ReportDoc.Load(dir + "\\Reports\\" + report.RPTFileName);
-                            ReportDoc.SetDataSource(dsReport);
-
-                            MyCrystalReportViewer.ReportSource = ReportDoc;
-                            MyCrystalReportViewer.RefreshReport();
-                            MyCrystalReportViewer.Visible = true;
-                            TextBox1.Text += "\n Reports Loaded ";
-                        }
-
-
-                    }
-                    else
-                        ShowError("No report with type " + reportType + " is found");
-
-
-
-                    //String folderPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
-
-                    //TextBox1.Text = Environment.CurrentDirectory.ToString();
-
-                    //invoiceId = Request[INVOICE_ID];
-                    //ReadXMLConfiguration();
-
-
-                }
+            { 
+                
             }
             else
             {
@@ -151,7 +59,7 @@ namespace SimplicityReportTest
             }
         }
 
-        private bool ReadXMLConfiguration()
+        private bool ReadXMLConfiguration(String reportType)
         {
             //String folderPath = Environment.GetFolderPath(Environment.SpecialFolder.System);
             //TextBox1.Text += folderPath;
@@ -163,9 +71,9 @@ namespace SimplicityReportTest
 
             try
             {
-                XmlTextReader reader = new XmlTextReader(dir.FullName + "\\reportSetting.xml");
+                XmlTextReader reader = new XmlTextReader(dir.FullName + "\\" + reportType + ".xml");
                 String value = null;
-                TextBox1.Text += dir.FullName + "\\reportSetting.xml";
+                TextBox1.Text += dir.FullName + "\\" + reportType + ".xml";
                 Report report = null;
                 ReportTable reportTable = null;
                 ReportTableParameter tableParam = null;
@@ -187,16 +95,6 @@ namespace SimplicityReportTest
                                 isReadingReportParameter = true;
                                 TextBox1.Text += "\n <ReportParameters>";
                             }
-                            else if (reader.Name == "TableParameters")
-                            {
-                                isReadingTableParameter = true;
-                                TextBox1.Text += "\n <TableParameters>";
-                            }
-                            else if (reader.Name == "TableRelationParameters")
-                            {
-                                isReadingTableRelationParameter = true;
-                                TextBox1.Text += "\n <TableRelationParameters>";
-                            }
                             else if (reader.Name == "Table")
                             {
                                 //isReadingTableParameter = true;
@@ -204,7 +102,6 @@ namespace SimplicityReportTest
                                 reportTable = new ReportTable();
                                 TextBox1.Text += "\n <Table>";
                             }
-
                             else if (reader.Name == "Parameter")
                             {
                                 if (isReadingReportParameter)
@@ -215,7 +112,6 @@ namespace SimplicityReportTest
                                     tableParam = new ReportTableParameter();
                                 TextBox1.Text += "\n <Parameter>";
                             }
-
                             break;
                         case XmlNodeType.Text: //Display the text in each element.
                             value = reader.Value;
@@ -241,28 +137,14 @@ namespace SimplicityReportTest
                                 else if (isReadingTableParameter)
                                     tableParam.ColumnName = value;
                                 else if (isReadingTables)
-                                    reportTable.Name = value;
+                                    report.TableName.Add(value);
                                 TextBox1.Text += "\n <Name>" + value + "</Name>";
 
                             }
-                            else if (reader.Name == "TableName")
+                            else if (reader.Name == "RelationName")
                             {
-                                rtrParameter.TableName = value;
-                            }
-                            else if (reader.Name == "ParentFieldName")
-                            {
-                                rtrParameter.ParentColumnName = value;
-                            }
-                            else if (reader.Name == "ChildFieldName")
-                            {
-                                rtrParameter.ChildColumnName = value;
-                            }
-                            else if (reader.Name == "ReportParameterIndex")
-                            {
-                                int val = 0;
-                                int.TryParse(value, out val);
-                                tableParam.ReportParameterIndex = val;
-                                TextBox1.Text += "\n <ReportParameterIndex>" + value + "</ReportParameterIndex>";
+                                report.TableRelation.Add(value);
+                                TextBox1.Text += "\n <RelationName>" + value + "</RelationName>";
                             }
                             else if (reader.Name == "UseDataSetSchema")
                             {
@@ -276,10 +158,16 @@ namespace SimplicityReportTest
                                 report.RPTFileName = value;
                                 TextBox1.Text += "\n <RPTFileName>" + value + "</RPTFileName>";
                             }
-
+                            else if (reader.Name == "Querry")
+                            {
+                                //report.Tables.Add(reportTable);
+                                report.Table.Add(value);
+                                TextBox1.Text += "\n <Querry>" + value + "</Querry>";
+                            }
                             else if (reader.Name == "Table")
                             {
-                                report.Tables.Add(reportTable);
+                                //report.Tables.Add(reportTable);
+                                //report.Table.Add(value);
                                 isReadingTables = false;
                                 TextBox1.Text += "\n </Table>";
                             }
@@ -292,16 +180,6 @@ namespace SimplicityReportTest
                                 else
                                     reportTable.TableParameters.Add(tableParam);
                                 TextBox1.Text += "\n </Parameter>";
-                            }
-                            else if (reader.Name == "TableParameters")
-                            {
-                                isReadingTableParameter = false;
-                                TextBox1.Text += "\n </TableParameters>";
-                            }
-                            else if (reader.Name == "TableRelationParameters")
-                            {
-                                isReadingTableRelationParameter = false;
-                                TextBox1.Text += "\n </TableRelationParameters>";
                             }
                             else if (reader.Name == "ReportParameters")
                             {
@@ -330,6 +208,121 @@ namespace SimplicityReportTest
         {
             errorLabel.Visible = true;
             errorLabel.Text += message;
+        }
+
+        protected void downloadReport_Click(object sender, EventArgs e)
+        {
+            Session[Authenticate.CALLER_URL] = null;
+
+            if (Request["environment"] != null) //request for page environment
+            {
+                RequestedEnvironment = Request["environment"];
+            }
+            else
+                RequestedEnvironment = Authenticate.PRODUCTION; //put production in requested Environment
+
+
+            errorLabel.Text = "";
+            //if (Request["environment"].CompareTo("SANDBOX") == 0)
+            if (SchemaUtilty.isDebugMode)
+                TextBox1.Visible = true;
+
+            try
+            {
+                dir = new System.IO.DirectoryInfo(path); //dir k ander reports ka path rakh day ga 
+                if (!dir.Exists)
+                    dir.Create();
+
+                dirSchema = new System.IO.DirectoryInfo(path + @"\Upload"); //dir k ander reports ka path rakh day ga 
+                if (!dirSchema.Exists)
+                    dirSchema.Create();
+
+            }
+            catch (Exception ex)
+            {
+                TextBox1.Text += "\n" + ex.Message;
+            }
+
+            TextBox1.Text += "\nOutside auth";
+            auth = (AuthenticationObject)Session[Authenticate.ACCESS_TOKEN];//////Taking Authentication from Session
+            if (auth != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT] != null && Session[Authenticate.AUTHENTICATED_ENVIRONMENT].ToString().CompareTo(RequestedEnvironment) == 0)////Check Authenticated and Environment
+            {
+                TextBox1.Text += "\nInside auth";
+                reportType = ReportID.Text;
+                if (reportType != null && reportType.Length > 0)
+                {
+                    TextBox1.Text += "\nInside report Type " + reportType;
+                    ReadXMLConfiguration(reportType);
+
+                    if (reportsDict.ContainsKey(reportType))
+                    {
+                        Report report = reportsDict[reportType];
+                        TextBox1.Text += "\nReport_TYPE " + reportType;
+
+                        DataSet reportDataSet = new DataSet("SimplicityDBSchema");
+                        for (int iterate = 0; iterate < report.Table.Count; iterate++)
+                        {
+                            try
+                            {
+                                String table = report.Table[iterate];
+                                
+                                String tableName = report.TableName[iterate];
+                                String tableRelation = report.TableRelation[iterate];
+                                SchemaUtilty.CreateDataSet(Page.Server, path, auth, tableName, reportDataSet, TextBox1);
+
+                            }
+                            catch (Exception ex)
+                            {
+                                TextBox1.Text += "\n" + ex.Message;
+                                TextBox1.Text += "\n" + ex.StackTrace;
+                            }
+
+                        }
+
+                        reportDataSet.WriteXmlSchema(dirSchema.FullName + @"\SimplicityDBSchema.xsd");
+                        try
+                        {
+                            string strURL = dirSchema.FullName + @"\SimplicityDBSchema.xsd";
+                            FileInfo file = new FileInfo(strURL);
+                            WebClient req = new WebClient();
+                            HttpResponse response = HttpContext.Current.Response;
+                            response.Clear();
+                            response.ClearContent();
+                            response.ClearHeaders();
+                            response.Buffer = true;
+                            response.ContentType = "application/octet-stream";
+                            response.AddHeader("Content-Disposition", "attachment;filename=\"" + file.Name + "\"");
+                            response.AddHeader("Content-Length", file.Length.ToString());
+                            //byte[] data = req.DownloadData(Server.MapPath(strURL));
+                            //response.BinaryWrite(data);
+                            Response.TransmitFile(file.FullName);
+                            response.End();
+                        }
+                        catch (Exception ex)
+                        {
+                            TextBox1.Text += "\n" + ex.Message;
+                            TextBox1.Text += "\n" + ex.StackTrace;
+                        }
+                        TextBox1.Text += "\n Reports Loaded ";
+                        // }
+
+
+                    }
+                    else
+                        ShowError("No report with type " + reportType + " is found");
+                }
+                else {
+                    ShowError("Enter Report Type");
+                }
+            }
+            else
+            {
+                Session["environment"] = RequestedEnvironment;
+                Session[Authenticate.ACCESS_TOKEN] = null;/////Assuring to Redirect Other Environment If Login Already
+                Session[Authenticate.CALLER_URL] = HttpContext.Current.Request.Url.AbsoluteUri;
+                Response.Redirect("~/Authenticate.aspx");
+                //lblInvoice.Text = "no auth";
+            }
         }
     }
 }
