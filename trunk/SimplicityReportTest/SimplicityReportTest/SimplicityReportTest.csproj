@@ -113,11 +113,9 @@
     <Content Include="Default.aspx" />
     <Content Include="Library\Newtonsoft.Json.Net35.dll" />
     <Content Include="Model1.edmx.sql" />
-<<<<<<< .mine
+
     <Content Include="ReportSchema.aspx" />
-=======
-    <Content Include="ShowQueries.aspx" />
->>>>>>> .r25
+
     <Content Include="ShowReport.aspx" />
     <Content Include="ShowResult.aspx" />
     <Content Include="SimplicityReports2.csproj" />
