@@ -204,6 +204,8 @@ namespace SimplicityReportTest
                                 textBox.Text += "Relation=" + tableRelation + "\n\n\n";
                                 if (ds.Tables[tableRelation] != null)
                                 {
+                                    textBox.Text += "Hello";
+                                    textBox.Text += "Rows Count =" + ds.Tables[tableRelation].Rows.Count;
                                     //dataSet.Tables[tableName].Merge(ds.Tables[tableRelation], true, MissingSchemaAction.Ignore);
                                     for (int j = 0; j < ds.Tables[tableRelation].Rows.Count; j++)
                                     {
@@ -224,8 +226,9 @@ namespace SimplicityReportTest
                                                     row[ds.Tables[tableRelation].Columns[i].ColumnName] = ds.Tables[tableRelation].Rows[j].ItemArray[i];
                                                 }
                                             }
-                                            //textBox.Text += ds.Tables[tableRelation].Columns[i].ColumnName + ":\t\t" + ds.Tables[tableRelation].Rows[j].ItemArray[i] + "\n";
+                                            textBox.Text += ds.Tables[tableRelation].Columns[i].ColumnName + ":\t\t" + ds.Tables[tableRelation].Rows[j].ItemArray[i] + "\n";
                                         }
+                                        textBox.Text += "Add row 1 from 1";
                                         dataSet.Tables[tableName].Rows.Add(row);
                                         //ds.Tables[tableRelation].Rows.Add(row);
                                     }
@@ -255,8 +258,9 @@ namespace SimplicityReportTest
                                                     row[ds.Tables[1].Columns[i].ColumnName] = ds.Tables[1].Rows[j].ItemArray[i];
                                                 }
                                             }
-                                            //textBox.Text += ds.Tables[1].Columns[i].ColumnName + ":\t\t" + ds.Tables[1].Rows[j].ItemArray[i] + "\n";
+                                            textBox.Text += ds.Tables[1].Columns[i].ColumnName + ":\t\t" + ds.Tables[1].Rows[j].ItemArray[i] + "\n";
                                         }
+                                        textBox.Text += "add row 2 from 2";
                                         textBox.Text += "\n add Row \n";
                                         dataSet.Tables[tableName].Rows.Add(row);
                                         //dataSet.Tables[tableName].Merge(ds.Tables[1], true, MissingSchemaAction.Ignore);
@@ -448,6 +452,10 @@ namespace SimplicityReportTest
                             else if (elementListtype[x].InnerXml.ToString().Equals("boolean"))
                             {
                                 dt.Columns.Add((elementListname[i].InnerXml).ToString(), typeof(Boolean));
+                            }
+                            else if (elementListtype[x].InnerXml.ToString().Equals("double") || elementListtype[x].InnerXml.ToString().Equals("currency"))
+                            {
+                                dt.Columns.Add((elementListname[i].InnerXml).ToString(), typeof(double));
                             }
                             else
                             {
