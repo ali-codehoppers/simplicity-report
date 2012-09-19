@@ -1,0 +1,41 @@
+<Reports>
+  <Report>
+    <ID>C680C698-8F78-11E1-A175-25AABBE59B18</ID>
+    <Name>OutstandingAppForPaymentAndInvoicesByClient</Name>
+    <RPTFileName>rptOutstandingAppForPaymentAndInvoicesByClient.rpt</RPTFileName>
+    <Tables>
+		  <Table>
+			<Name>Account</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					Select Id, Name, IsDeleted, MasterRecordId, CreatedDate, Type, RecordTypeId, ParentId, BillingStreet, BillingCity, BillingState, BillingPostalCode, BillingCountry, ShippingStreet, ShippingCity, ShippingState, ShippingPostalCode, ShippingCountry, Phone, Fax, Website, Industry, AnnualRevenue, NumberOfEmployees, Description, OwnerId, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, simplicity__Active__c, simplicity__SLAExpirationDate__c, simplicity__SLASerialNumber__c, simplicity__SLA__c, simplicity__boolExternal__c, simplicity__boolHidden__c, simplicity__boolInternal__c, simplicity__boolManager__c, simplicity__dblCIS_Rate__c, simplicity__recCIS__c, simplicity__strCostCode__c, simplicity__strDepartmentName__c, simplicity__strFinancialPkgAccRef__c, simplicity__strFirstName__c, simplicity__strLastName__c, simplicity__strSAGE_LongName__c, simplicity__strSAGE_NominalCodeClient__c, simplicity__strSAGE_NominalCode__c, simplicity__strSAGE_TaxCode__c, simplicity__strURN__c
+					from Account where Id ='##accountId##'
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__Job__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					Select Id, CreatedDate, simplicity__Client_Ref__c, simplicity__Tel_Mobile__c, simplicity__Tel_Work__c, simplicity__User_Chosen_Job_Reference__c, simplicity__Work_Centre__c, simplicity__strContactName__c, simplicity__strJobAddress__c, simplicity__strOrderShortDesc__c, simplicity__Trade_Code__c, simplicity__Client__c, simplicity__Tel_Home__c, OwnerId, IsDeleted, Name, RecordTypeId, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, simplicity__Actual_Days__c, simplicity__Contact__c, simplicity__County__c, simplicity__Custom_Reference_Number__c, simplicity__Due_Date__c, simplicity__Email__c, simplicity__Enquiry_Notes__c, simplicity__Ext__c, simplicity__House_Flat_No__c, simplicity__In_House_Surveyor__c, simplicity__Internal_Notes__c, simplicity__Job_Address_Priority__c, simplicity__Job_Reference__c, simplicity__Job_Resolution__c, simplicity__KPI_Complete__c, simplicity__Originator__c, simplicity__Post_Code__c, simplicity__Previous_Monthly_Check__c, simplicity__Report_Filter__c, simplicity__Returned_By_Surveyor__c, simplicity__Start_Date__c, simplicity__Status__c, simplicity__Street_1__c, simplicity__Street_2__c, simplicity__Street_3__c, simplicity__Target_Days__c, simplicity__Town__c, simplicity__VO_Contact__c, simplicity__VO_Details__c, simplicity__VO_to_Surveyor__c, simplicity__Year__c, simplicity__boolChecklistRequired__c, simplicity__boolOrderHasVOs__c, simplicity__curTotalVOSchedItemRollUps__c, simplicity__curTotal__c, simplicity__datConvertToJobTicket__c, simplicity__datDateCreated__c, simplicity__dblPcentOrderCompleted__c, simplicity__dblPcentOrderDiscount__c, simplicity__dblPcentOrderRetention__c, simplicity__dtmCancelledDate__c, simplicity__dtmEstimateSent__c, simplicity__dtmMonthlyCheckDoneDate__c, simplicity__dtmOrderFinishDate__c, simplicity__dtmUserControl1__c, simplicity__dtmUserControl2__c, simplicity__intNoAccessCount__c, simplicity__objJob_Manager__c, simplicity__objStatusType__c, simplicity__recAddressForeignKey__c, simplicity__strCancelledRefAuto__c, simplicity__strCancelledReference__c, simplicity__strEstimateDetails__c, simplicity__strJobAddressEstimating__c, simplicity__strJobAddressVO__c, simplicity__strJobManager__c, simplicity__strNoAccessNotes__c, simplicity__strNoAccessReference__c, simplicity__strOrderNotes__c, simplicity__Plant__c, simplicity__Total_Labour__c, simplicity__Total_Plant__c, simplicity__curAdjCodeRollUp__c, simplicity__curLabourRollUp__c, simplicity__curMaterialsRollUp__c, simplicity__curP1RollUp__c, simplicity__curTotalSchedItemRollUp__c, simplicity__curTotalVORollUp__c, simplicity__curValueRollUp__c
+					from simplicity__Job__c where simplicity__Client__c ='##accountId##'
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__objOrderInvoice__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+				Select Id, OwnerId, IsDeleted, Name, RecordTypeId, CreatedDate, CreatedById,  LastModifiedDate, LastModifiedById, SystemModstamp, simplicity__boolInvoiceIsVAT_Only__c, simplicity__boolRetention__c, simplicity__datInvoiceDate__c, simplicity__datRetentionEnd__c, simplicity__datRetentionStart__c, simplicity__objOrderDetails__c, simplicity__strInvoiceAddress__c, simplicity__strInvoiceClientName__c, simplicity__strInvoiceNotes__c, simplicity__strInvoiceRefAutoNumber__c, simplicity__strInvoiceReference__c, simplicity__strJobAddress__c, simplicity__strJobClientName__c, simplicity__strJobReference__c, simplicity__curAmtBase__c, simplicity__curAmtDiscount__c, simplicity__curAmtInvoiceCIS__c, simplicity__curAmtRetention__c, simplicity__curAmtSubTotal__c, simplicity__curAmtTotal__c, simplicity__curAmtVAT__c
+				from simplicity__objOrderInvoice__c where simplicity__objOrderDetails__c in (Select Id from simplicity__Job__c where simplicity__Client__c ='##accountId##')
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__objInvoiceEntries__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+				Select Id, OwnerId, IsDeleted, Name, CreatedDate, CreatedById,  LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, simplicity__boolAddVAT__c, simplicity__boolAllocatedTotally__c, simplicity__boolCIS_Tax__c, simplicity__curAmtAllocatedLabour__c, simplicity__curAmtAllocatedMaterial__c, simplicity__curAmtAllocatedTotal__c, simplicity__curAmtCIS__c, simplicity__curAmtDiscount__c, simplicity__curAmtLabour__c, simplicity__curAmtMaterial__c, simplicity__curAmtSubTotal__c, simplicity__curAmtTotalLabourOnly__c, simplicity__curAmtTotalMaterialOnly__c, simplicity__curAmtTotal__c, simplicity__curAmtVAT__c, simplicity__datEntryDate__c, simplicity__dblPcentCIS_Tax__c, simplicity__objAccount__c, simplicity__objOrderInvoice__c, simplicity__objOrder__c, simplicity__recEntryTransType__c, simplicity__recEntryType__c, simplicity__strEntryNotes2__c, simplicity__strEntryNotes__c, simplicity__strEntryReference__c, simplicity__curMatOutstanding__c
+				from simplicity__objInvoiceEntries__c where simplicity__objOrderInvoice__r.simplicity__objOrderDetails__r.simplicity__Client__c ='##accountId##'
+			</Querry>
+		  </Table>
+    </Tables>
+  </Report>
+</Reports>

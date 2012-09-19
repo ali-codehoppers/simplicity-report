@@ -1,8 +1,8 @@
 <Reports>
   <Report>
-    <ID>A372A8CC-36A1-11E1-9011-43B44724019B</ID>
-    <Name>Invoice_WebProof</Name>
-    <RPTFileName>rptInvoice_WebProof.rpt</RPTFileName>
+    <ID>6ef14e46-7c87-4b05-b5f6-25b9c9fa2254</ID>
+    <Name>AppForPayment_WebProof</Name>
+    <RPTFileName>rptAppForPayment_WebProof.rpt</RPTFileName>
     <Tables>
 		  <Table>
 			<Name>simplicity__objOrderInvoiceItems__c</Name>
@@ -20,7 +20,14 @@
 					from simplicity__objOrderInvoiceItems__c where simplicity__objOrderInvoice__r.id='##invoiceId##'
 			</Querry>
 		  </Table>
-
+		  <Table>
+			<Name>simplicity__Item_Unit__c</Name>
+			<RelationName>simplicity__strItemUnit__r</RelationName>
+			<Querry>
+					SELECT simplicity__objJobItem__r.simplicity__strItemUnit__r.Id, simplicity__objJobItem__r.simplicity__strItemUnit__r.simplicity__Unique_Unit__c, simplicity__objJobItem__r.simplicity__strItemUnit__r.OwnerId, simplicity__objJobItem__r.simplicity__strItemUnit__r.IsDeleted, simplicity__objJobItem__r.simplicity__strItemUnit__r.Name, simplicity__objJobItem__r.simplicity__strItemUnit__r.CreatedDate, simplicity__objJobItem__r.simplicity__strItemUnit__r.CreatedById, simplicity__objJobItem__r.simplicity__strItemUnit__r.LastModifiedDate, simplicity__objJobItem__r.simplicity__strItemUnit__r.LastModifiedById, simplicity__objJobItem__r.simplicity__strItemUnit__r.SystemModstamp, simplicity__objJobItem__r.simplicity__strItemUnit__r.simplicity__Installation_ID__c, simplicity__objJobItem__r.simplicity__strItemUnit__r.simplicity__strDescription__c
+					from simplicity__objOrderInvoiceItems__c where simplicity__objOrderInvoice__r.id='##invoiceId##'
+			</Querry>
+		  </Table>
 		  <Table>
 			<Name>simplicity__objOrderInvoice__c</Name>
 			<RelationName>Empty</RelationName>
@@ -37,7 +44,14 @@
 					from simplicity__objOrderInvoice__c where Id= '##invoiceId##'
 			</Querry>
 		  </Table>
-
+		  <Table>
+			<Name>simplicity__Trade_Code__c</Name>
+			<RelationName>simplicity__Trade_Code__r</RelationName>
+			<Querry>
+					Select simplicity__objOrderDetails__r.simplicity__Trade_Code__r.Id, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.simplicity__Description__c, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.OwnerId, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.IsDeleted, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.Name, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.CreatedDate, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.CreatedById, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.LastModifiedDate, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.LastModifiedById, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.SystemModstamp, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.simplicity__Grouping__c, simplicity__objOrderDetails__r.simplicity__Trade_Code__r.simplicity__Sort_Order__c
+					from simplicity__objOrderInvoice__c where Id= '##invoiceId##'
+			</Querry>
+		  </Table>
 		  <Table>
 			<Name>Account</Name>
 			<RelationName>simplicity__Client__r</RelationName>

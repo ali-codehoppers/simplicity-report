@@ -1,0 +1,66 @@
+<Reports>
+  <Report>
+    <ID>8EBB89EE-36A1-11E1-9187-29B44724019B</ID>
+    <Name>ProForma</Name>
+    <RPTFileName>rptProForma.rpt</RPTFileName>
+    <Tables>
+		  <Table>
+			<Name>simplicity__Job__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					Select Id, CreatedDate, simplicity__Client_Ref__c, simplicity__Tel_Mobile__c, simplicity__Tel_Work__c, simplicity__User_Chosen_Job_Reference__c, simplicity__Work_Centre__c, simplicity__strContactName__c, simplicity__strJobAddress__c, simplicity__strOrderShortDesc__c, simplicity__Trade_Code__c, simplicity__Client__c, simplicity__Tel_Home__c, OwnerId, IsDeleted, Name, RecordTypeId, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, simplicity__Actual_Days__c, simplicity__Contact__c, simplicity__County__c, simplicity__Custom_Reference_Number__c, simplicity__Due_Date__c, simplicity__Email__c, simplicity__Enquiry_Notes__c, simplicity__Ext__c, simplicity__House_Flat_No__c, simplicity__In_House_Surveyor__c, simplicity__Internal_Notes__c, simplicity__Job_Address_Priority__c, simplicity__Job_Reference__c, simplicity__Job_Resolution__c, simplicity__KPI_Complete__c, simplicity__Originator__c, simplicity__Post_Code__c, simplicity__Previous_Monthly_Check__c, simplicity__Report_Filter__c, simplicity__Returned_By_Surveyor__c, simplicity__Start_Date__c, simplicity__Status__c, simplicity__Street_1__c, simplicity__Street_2__c, simplicity__Street_3__c, simplicity__Target_Days__c, simplicity__Town__c, simplicity__VO_Contact__c, simplicity__VO_Details__c, simplicity__VO_to_Surveyor__c, simplicity__Year__c, simplicity__boolChecklistRequired__c, simplicity__boolOrderHasVOs__c, simplicity__curTotalVOSchedItemRollUps__c, simplicity__curTotal__c, simplicity__datConvertToJobTicket__c, simplicity__datDateCreated__c, simplicity__dblPcentOrderCompleted__c, simplicity__dblPcentOrderDiscount__c, simplicity__dblPcentOrderRetention__c, simplicity__dtmCancelledDate__c, simplicity__dtmEstimateSent__c, simplicity__dtmMonthlyCheckDoneDate__c, simplicity__dtmOrderFinishDate__c, simplicity__dtmUserControl1__c, simplicity__dtmUserControl2__c, simplicity__intNoAccessCount__c, simplicity__objJob_Manager__c, simplicity__objStatusType__c, simplicity__recAddressForeignKey__c, simplicity__strCancelledRefAuto__c, simplicity__strCancelledReference__c, simplicity__strEstimateDetails__c, simplicity__strJobAddressEstimating__c, simplicity__strJobAddressVO__c, simplicity__strJobManager__c, simplicity__strNoAccessNotes__c, simplicity__strNoAccessReference__c, simplicity__strOrderNotes__c, simplicity__Plant__c, simplicity__Total_Labour__c, simplicity__Total_Plant__c, simplicity__curAdjCodeRollUp__c, simplicity__curLabourRollUp__c, simplicity__curMaterialsRollUp__c, simplicity__curP1RollUp__c, simplicity__curTotalSchedItemRollUp__c, simplicity__curTotalVORollUp__c, simplicity__curValueRollUp__c
+					from simplicity__Job__c where Id in (Select simplicity__objOrderDetails__c from simplicity__objOrderInvoice__c where id='##invoiceId##')
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__Job_Item__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					SELECT Id, IsDeleted, Name, RecordTypeId, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, simplicity__Job__c, simplicity__Actual_Delivery__c, simplicity__Adjustment_Code__c, simplicity__Assigned_To__c, simplicity__Chargeable__c, simplicity__Custom_List_Price__c, simplicity__D_or_W__c, simplicity__Date_Raised__c, simplicity__Docs_Received__c, simplicity__Due_Date__c, simplicity__Edit_SOR_Item__c, simplicity__Estimated_Delivery__c, simplicity__Height_Feet__c, simplicity__Height_Inches__c, simplicity__Height_Text__c, simplicity__Height__c, simplicity__Item_Notes_Internal__c, simplicity__Item_Notes__c, simplicity__Item_VAM__c, simplicity__Labour_After_Change__c, simplicity__Length_Feet__c, simplicity__Length_Inches__c, simplicity__Length_Text__c, simplicity__Length__c, simplicity__Omit__c, simplicity__Outside_Diameter__c, simplicity__Passed_To__c, simplicity__Plant_After_Change__c, simplicity__Start_Date__c, simplicity__Status__c, simplicity__Text__c, simplicity__VO_Status__c, simplicity__VO__c, simplicity__Weight__c, simplicity__Width_Feet__c, simplicity__Width_Inches__c, simplicity__Width_Text__c, simplicity__Width__c, simplicity__boolFilter__c, simplicity__boolOI_Invoiced__c, simplicity__curAdjustmentCodeValueChange__c, simplicity__curAmtInvoicedBalance__c, simplicity__curAmtLabourChange__c, simplicity__curAmtLabour__c, simplicity__curAmtMaterialChange__c, simplicity__curAmtMaterial__c, simplicity__curAmtPlantChange__c, simplicity__curAmtPlant__c, simplicity__curAmtSubTotal1__c, simplicity__curAmtSubTotal2__c, simplicity__curAmtSubTotal3__c, simplicity__curAmtSubTotal4__c, simplicity__curAmtTotal__c, simplicity__curPriorityCodeValueChange__c, simplicity__curQuanLabValueChange__c, simplicity__curQuanMaterialValueChange__c, simplicity__curQuanValValChange__c, simplicity__curQuantityAdjCodeValueChange__c, simplicity__curQuantityPriorityCodeValueChange__c, simplicity__curTotalScheduledItem__c, simplicity__curTotalVO__c, simplicity__curValueValueChange__c, simplicity__datVODateAuthorised__c, simplicity__datVODateCancelled__c, simplicity__datVODatePending__c, simplicity__datVODateRequested__c, simplicity__dblInvoicedQuantity__c, simplicity__dblItemQuantity__c, simplicity__dblPcentAdjustmentChange__c, simplicity__dblPcentLabourChange__c, simplicity__dblPcentMaterialChange__c, simplicity__dblPcentPlantChange__c, simplicity__dblPcentPriorityCodeChange__c, simplicity__dblPcentValueChange__c, simplicity__intPosition__c, simplicity__lngItemSequence__c, simplicity__objVOAuthorisedBy__c, simplicity__objVOCancelledBy__c, simplicity__objVORequestedBy__c, simplicity__strItemCode__c, simplicity__strItemDescription__c, simplicity__strItemUnit__c, simplicity__strPriorityCode__c, simplicity__strVOAuthorisationReference__c
+					from simplicity__Job_Item__c where simplicity__Job__c in (Select simplicity__objOrderDetails__c from simplicity__objOrderInvoice__c where id='##invoiceId##')
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>Account</Name>
+			<RelationName>simplicity__Client__r</RelationName>
+			<Querry>
+					Select simplicity__Client__r.Id, simplicity__Client__r.Name, simplicity__Client__r.IsDeleted, simplicity__Client__r.MasterRecordId, simplicity__Client__r.CreatedDate, simplicity__Client__r.Type, simplicity__Client__r.RecordTypeId, simplicity__Client__r.ParentId, simplicity__Client__r.BillingStreet, simplicity__Client__r.BillingCity, simplicity__Client__r.BillingState, simplicity__Client__r.BillingPostalCode, simplicity__Client__r.BillingCountry, simplicity__Client__r.ShippingStreet, simplicity__Client__r.ShippingCity, simplicity__Client__r.ShippingState, simplicity__Client__r.ShippingPostalCode, simplicity__Client__r.ShippingCountry, simplicity__Client__r.Phone, simplicity__Client__r.Fax, simplicity__Client__r.Website, simplicity__Client__r.Industry, simplicity__Client__r.AnnualRevenue, simplicity__Client__r.NumberOfEmployees, simplicity__Client__r.Description, simplicity__Client__r.OwnerId, simplicity__Client__r.CreatedById, simplicity__Client__r.LastModifiedDate, simplicity__Client__r.LastModifiedById, simplicity__Client__r.SystemModstamp, simplicity__Client__r.LastActivityDate, simplicity__Client__r.simplicity__Active__c, simplicity__Client__r.simplicity__boolHidden__c, simplicity__Client__r.simplicity__boolInternal__c, simplicity__Client__r.simplicity__boolManager__c, simplicity__Client__r.simplicity__dblCIS_Rate__c, simplicity__Client__r.simplicity__recCIS__c, simplicity__Client__r.simplicity__strCostCode__c, simplicity__Client__r.simplicity__strFinancialPkgAccRef__c, simplicity__Client__r.simplicity__strFirstName__c, simplicity__Client__r.simplicity__strLastName__c, simplicity__Client__r.simplicity__strSAGE_NominalCodeClient__c, simplicity__Client__r.simplicity__SLAExpirationDate__c, simplicity__Client__r.simplicity__SLASerialNumber__c, simplicity__Client__r.simplicity__SLA__c, simplicity__Client__r.simplicity_Currency_Symbols__c
+					from simplicity__Job__c where Id in (Select simplicity__objOrderDetails__c from simplicity__objOrderInvoice__c where id='##invoiceId##')
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__Item_Unit__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+				Select simplicity__strItemUnit__r.Id, simplicity__strItemUnit__r.simplicity__Unique_Unit__c, simplicity__strItemUnit__r.OwnerId, simplicity__strItemUnit__r.IsDeleted, simplicity__strItemUnit__r.Name,  simplicity__strItemUnit__r.CreatedById,  simplicity__strItemUnit__r.LastModifiedById,  simplicity__strItemUnit__r.simplicity__Installation_ID__c, simplicity__strItemUnit__r.simplicity__strDescription__c 
+				from simplicity__Job_Item__c where simplicity__Job__c in (Select simplicity__objOrderDetails__c from simplicity__objOrderInvoice__c where id='##invoiceId##') Group By simplicity__strItemUnit__r.simplicity__Unique_Unit__c,simplicity__strItemUnit__r.Id,
+				simplicity__strItemUnit__r.OwnerId, simplicity__strItemUnit__r.IsDeleted, simplicity__strItemUnit__r.Name, simplicity__strItemUnit__r.simplicity__Installation_ID__c, simplicity__strItemUnit__r.simplicity__strDescription__c, simplicity__strItemUnit__r.CreatedById,  simplicity__strItemUnit__r.LastModifiedById
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__Trade_Code__c</Name>
+			<RelationName>simplicity__Trade_Code__r</RelationName>
+			<Querry>
+					Select simplicity__Trade_Code__r.Id, simplicity__Trade_Code__r.simplicity__Description__c, simplicity__Trade_Code__r.OwnerId, simplicity__Trade_Code__r.IsDeleted, simplicity__Trade_Code__r.Name, simplicity__Trade_Code__r.CreatedDate, simplicity__Trade_Code__r.CreatedById, simplicity__Trade_Code__r.LastModifiedDate, simplicity__Trade_Code__r.LastModifiedById, simplicity__Trade_Code__r.SystemModstamp, simplicity__Trade_Code__r.simplicity__Grouping__c, simplicity__Trade_Code__r.simplicity__Sort_Order__c  
+					from simplicity__Job__c where Id in (Select simplicity__objOrderDetails__c from simplicity__objOrderInvoice__c where id='##invoiceId##')
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__objOrderInvoiceItems__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+				Select Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, simplicity__objOrderInvoice__c, simplicity__boolInvoiceInclude__c, simplicity__curAmtCIS__c, simplicity__curAmtDiscount__c, simplicity__curAmtInvoiceSubTotal1__c, simplicity__curAmtInvoiceSubTotal2__c, simplicity__curAmtInvoiceSubTotal3__c, simplicity__curAmtInvoice__c, simplicity__curAmtRetention__c, simplicity__curAmtTotal__c, simplicity__curAmtVAT__c, simplicity__dblInvoiceQuantity__c, simplicity__dblPcentCIS__c, simplicity__dblPcentDiscount__c, simplicity__dblPcentInvoiceVAT__c, simplicity__dblPcentInvoice__c, simplicity__dblPcentRetention__c, simplicity__objJobItem__c, simplicity__strOrderItemId__c
+				from simplicity__objOrderInvoiceItems__c where simplicity__objOrderInvoice__c ='##invoiceId##'
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__objOrderInvoice__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+				Select Id, OwnerId, IsDeleted, Name, RecordTypeId, CreatedDate, CreatedById,  LastModifiedDate, LastModifiedById, SystemModstamp, simplicity__boolInvoiceIsVAT_Only__c, simplicity__boolRetention__c, simplicity__datInvoiceDate__c, simplicity__datRetentionEnd__c, simplicity__datRetentionStart__c, simplicity__objOrderDetails__c, simplicity__strInvoiceAddress__c, simplicity__strInvoiceClientName__c, simplicity__strInvoiceNotes__c, simplicity__strInvoiceRefAutoNumber__c, simplicity__strInvoiceReference__c, simplicity__strJobAddress__c, simplicity__strJobClientName__c, simplicity__strJobReference__c, simplicity__curAmtBase__c, simplicity__curAmtDiscount__c, simplicity__curAmtInvoiceCIS__c, simplicity__curAmtRetention__c, simplicity__curAmtSubTotal__c, simplicity__curAmtTotal__c, simplicity__curAmtVAT__c
+				from simplicity__objOrderInvoice__c where Id ='##invoiceId##'
+			</Querry>
+		  </Table>
+    </Tables>
+  </Report>
+</Reports>
