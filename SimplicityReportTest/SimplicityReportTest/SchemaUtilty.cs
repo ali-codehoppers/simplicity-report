@@ -13,7 +13,7 @@ namespace SimplicityReportTest
 {
     public class SchemaUtilty
     {
-        public static bool isDebugMode = true;
+        public static bool isDebugMode = false;
         public static String GetFullQueryString(DataSet dataSet, string tableName)
         {
             String query = "";
@@ -453,7 +453,7 @@ namespace SimplicityReportTest
                             {
                                 dt.Columns.Add((elementListname[i].InnerXml).ToString(), typeof(Boolean));
                             }
-                            else if (elementListtype[x].InnerXml.ToString().Equals("double") || elementListtype[x].InnerXml.ToString().Equals("currency"))
+                            else if (elementListtype[x].InnerXml.ToString().Equals("double") || elementListtype[x].InnerXml.ToString().Equals("currency") || elementListtype[x].InnerXml.ToString().Equals("percent"))
                             {
                                 dt.Columns.Add((elementListname[i].InnerXml).ToString(), typeof(double));
                             }
