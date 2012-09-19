@@ -1,0 +1,25 @@
+<Reports>
+  <Report>
+    <ID>845b72ec-90ab-493b-9e66-355a3ee62b99</ID>
+    <Name>ClientAgedDebtors</Name>
+    <RPTFileName>rptClientAgedDebtors.rpt</RPTFileName>
+    <Tables>
+		  <Table>
+			<Name>Account</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					Select Id, Name, IsDeleted, MasterRecordId, CreatedDate, Type, RecordTypeId, ParentId, BillingStreet, BillingCity, BillingState, BillingPostalCode, BillingCountry, ShippingStreet, ShippingCity, ShippingState, ShippingPostalCode, ShippingCountry, Phone, Fax, Website, Industry, AnnualRevenue, NumberOfEmployees, Description, OwnerId, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, simplicity__Active__c, simplicity__boolHidden__c, simplicity__boolInternal__c, simplicity__boolManager__c, simplicity__dblCIS_Rate__c, simplicity__recCIS__c, simplicity__strCostCode__c, simplicity__strFinancialPkgAccRef__c, simplicity__strFirstName__c, simplicity__strLastName__c, simplicity__strSAGE_NominalCodeClient__c, simplicity__SLAExpirationDate__c, simplicity__SLASerialNumber__c, simplicity__SLA__c, simplicity_Currency_Symbols__c
+					from Account
+			</Querry>
+		  </Table>
+		  <Table>
+			<Name>simplicity__objInvoiceEntries__c</Name>
+			<RelationName>Empty</RelationName>
+			<Querry>
+					Select simplicity__curAmtTotal__c,simplicity__curAmtAllocatedLabour__c,simplicity__curAmtAllocatedMaterial__c,simplicity__datEntryDate__c,simplicity__objAccount__c
+					from simplicity__objInvoiceEntries__c where simplicity__recEntryType__c = 'Sales Invoice'
+			</Querry>
+		  </Table>
+    </Tables>
+  </Report>
+</Reports>
